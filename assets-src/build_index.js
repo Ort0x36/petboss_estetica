@@ -31,6 +31,8 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Prévia: não indexar até a Pet Boss aprovar. Remova esta linha na publicação oficial. -->
+<meta name="robots" content="noindex, nofollow">
 <title>Pet Boss Estética Animal | Banho e tosa em Mauá/SP</title>
 <meta name="description" content="Banho, tosa na máquina, tosa na tesoura e tratamento de pelagem na Av. Brasil, 445, em Mauá/SP. Agende pelo WhatsApp.">
 <link rel="canonical" href="${SITE}">
