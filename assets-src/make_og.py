@@ -1,0 +1,35 @@
+"""Gera og-image.png (1200x630), a imagem de prévia do link. Uso: python3 assets-src/make_og.py"""
+import pathlib
+from playwright.sync_api import sync_playwright
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+MARCA = (ROOT / "assets-src" / "marca.js").as_uri()
+HTML = """<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Figtree:wght@600;700&display=swap" rel="stylesheet">
+<script src="MARCA"></script>
+<style>*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;background:#15120F;color:#FAF5EA;font-family:Figtree,sans-serif;position:relative}
+.l{position:absolute;left:72px;top:66px;width:620px}
+h1{font:600 70px/1.03 Fraunces,serif;letter-spacing:-.015em;margin-top:54px}
+h1 em{font-style:italic;font-weight:500;color:#C9A23F}
+p{font:600 26px/1.4 Figtree;color:#CFC4B0;margin-top:22px;max-width:560px}
+.chips{position:absolute;left:72px;bottom:60px;display:flex;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:99px;font:700 21px Figtree}
+.c1{border:2px solid #C9A23F;color:#E7CF8C}.c2{background:#C9A23F;color:#15120F}
+.arch{position:absolute;right:64px;top:56px;width:400px;height:518px;border-radius:200px 200px 28px 28px;background:#F1E6D2;overflow:hidden}
+.arch:before{content:"";position:absolute;inset:12px;border-radius:190px 190px 18px 18px;border:2px solid #C9A23F;opacity:.6}
+.arch svg{position:absolute;left:50%;bottom:16px;width:300px;transform:translateX(-50%)}
+.b{position:absolute;border-radius:50%;border:2px solid rgba(201,162,63,.6);background:radial-gradient(circle at 32% 30%,#fff 0 16%,transparent 18%)}
+</style></head><body>
+<div class="l" id="lk"></div>
+<div class="chips"><span class="chip c1">Av. Brasil, 445 · Mauá/SP</span><span class="chip c2">Agende pelo WhatsApp</span></div>
+<div class="arch" id="arch"><span class="b" style="left:48px;top:120px;width:34px;height:34px"></span><span class="b" style="left:310px;top:90px;width:22px;height:22px"></span><span class="b" style="left:320px;top:200px;width:40px;height:40px"></span><span class="b" style="left:70px;top:250px;width:18px;height:18px"></span></div>
+<script>
+document.getElementById('lk').innerHTML=PB.lockup('dark',50)+'<h1>Banho e tosa com <em>pose de chefe.</em></h1><p>Tosa na máquina e na tesoura e tratamento de pelagem em Mauá/SP.</p>';
+document.getElementById('arch').insertAdjacentHTML('beforeend',PB.dogFullSvg({bandana:'#15120F'}));
+</script></body></html>""".replace("MARCA", MARCA)
+out = ROOT / "assets-src" / "og-image.html"; out.write_text(HTML, encoding="utf-8")
+with sync_playwright() as p:
+    b = p.chromium.launch(); pg = b.new_page(viewport={"width": 1200, "height": 630})
+    pg.goto(out.as_uri()); pg.evaluate("document.fonts.ready"); pg.wait_for_load_state("networkidle"); pg.wait_for_timeout(500)
+    pg.screenshot(path=str(ROOT / "og-image.png")); b.close()
+print("ok", (ROOT / "og-image.png").stat().st_size)
