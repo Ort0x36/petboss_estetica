@@ -23,7 +23,7 @@ const ICON = {
 };
 const ic = (k, cls) => '<svg class="' + (cls || "ic") + '" viewBox="0 0 42 42" aria-hidden="true">' + ICON[k] + "</svg>";
 const WA = '<svg class="wa-i" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.2 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.1.1-.3.3-.1.6.7 1.1 1.5 1.8 2.6 2.4.3.1.5.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.3.1.8-.1 1.4z"/></svg>';
-const SITE = "https://petboss-estetica.vercel.app/";
+const SITE = "https://petbossestetica-kappa.vercel.app/";
 const bubbles = (n, cls) => Array.from({ length: n }, (_, i) => '<i class="' + cls + '" style="--i:' + i + '"></i>').join("");
 
 const html = `<!DOCTYPE html>
